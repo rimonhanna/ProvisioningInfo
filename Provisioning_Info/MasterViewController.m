@@ -206,6 +206,40 @@
     return profile;
 }
 
+
+- (NSArray*)getSelectedProfiles
+{
+    NSMutableArray *profiles = [[NSMutableArray alloc] init];
+    
+    [self.table.selectedRowIndexes enumerateIndexesUsingBlock:^(NSUInteger selectedRow, BOOL *stop)
+     {
+         ProvisioningProfileBean *profile = nil;
+         
+         if (self.isFilter)
+         {
+             if (self.filterProfiles.count > selectedRow)
+             {
+                 profile = self.filterProfiles[selectedRow];
+                 if (profile.name == nil)
+                     profile = nil;
+             }
+         }
+         else if (self.profiles.count > selectedRow)
+         {
+             profile = self.profiles[selectedRow];
+             if (profile.name == nil)
+                 profile = nil;
+         }
+         
+         if(profile)
+             [profiles addObject:profile];
+     }];
+    
+    
+    
+    return [NSArray arrayWithArray:profiles];
+}
+
 #pragma mark - Actions
 
 - (IBAction)openButton:(id)sender
@@ -296,12 +330,17 @@
 
 - (IBAction)deleteProvisioning:(id)sender
 {
-    ProvisioningProfileBean *profile = [self getProfileSelected];
-    if (profile == nil)
+    NSArray *profiles = [self getSelectedProfiles];
+    
+    if (profiles == nil)
         [NSApp presentError:[NSError errorWithDomain:@"Failed to delete the provisioning profile" code:0 userInfo:@{}]];
     else
     {
-        [[NSFileManager defaultManager] trashItemAtURL:[NSURL fileURLWithPath:profile.path] resultingItemURL:nil error:nil];
+        for (ProvisioningProfileBean *profile in profiles)
+        {
+            if(profile)
+                [[NSFileManager defaultManager] trashItemAtURL:[NSURL fileURLWithPath:profile.path] resultingItemURL:nil error:nil];
+        }
         [self refreshList:nil];
     }
 }
