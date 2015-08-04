@@ -1,3 +1,6 @@
+This is a fork of  ProvisioningInfo by LigeiaRowena adding the ability to delete multiple provisioning profiles at the same time.
+
+
 This is a OSX utility app to obtain all the provisioning profiles (.mobileprovision files) in your mac.
 You have access to all the infos about your provisioning profiles:
 - list of all the provisioning profiles in your default path (/User/Library/MobileDevice/Provisioning Profiles) or a custom path by your choice
