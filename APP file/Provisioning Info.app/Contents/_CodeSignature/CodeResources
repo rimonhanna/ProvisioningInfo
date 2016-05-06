@@ -8,7 +8,7 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			1LD74SBdF8K7mRlq7qoFwHd7f3k=
+			RAMK+dllJdoLpOqH7E++nOydISg=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -19,7 +19,7 @@
 		</data>
 		<key>Resources/MasterViewController.nib</key>
 		<data>
-		bQqZuzQI3coXMQVA31kCSHGGKdg=
+		JcKuSUS2CeW7G+r2ws8jIjZ6aqI=
 		</data>
 	</dict>
 	<key>files2</key>
@@ -28,19 +28,37 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			1LD74SBdF8K7mRlq7qoFwHd7f3k=
+			RAMK+dllJdoLpOqH7E++nOydISg=
+			</data>
+			<key>hash2</key>
+			<data>
+			kjTffnsOowUnO5dkzOrhPr0uLZZZbZtjJFRm7WKLLCM=
 			</data>
 			<key>optional</key>
 			<true/>
 		</dict>
 		<key>Resources/Icon.icns</key>
-		<data>
-		S8fZpcEyTaIV6o2xJZ0MGe8NQPE=
-		</data>
+		<dict>
+			<key>hash</key>
+			<data>
+			S8fZpcEyTaIV6o2xJZ0MGe8NQPE=
+			</data>
+			<key>hash2</key>
+			<data>
+			DIh74tqR+5pdFIkcvSce1A3LDzwxza2u0ZJ1uYBiHRI=
+			</data>
+		</dict>
 		<key>Resources/MasterViewController.nib</key>
-		<data>
-		bQqZuzQI3coXMQVA31kCSHGGKdg=
-		</data>
+		<dict>
+			<key>hash</key>
+			<data>
+			JcKuSUS2CeW7G+r2ws8jIjZ6aqI=
+			</data>
+			<key>hash2</key>
+			<data>
+			O4Ne23k19TVsRX1BljLkNrJchNFCb2fEj4U428tIsLA=
+			</data>
+		</dict>
 	</dict>
 	<key>rules</key>
 	<dict>
