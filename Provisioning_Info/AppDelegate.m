@@ -19,10 +19,14 @@
     // add a contentView
     self.masterViewController = [[MasterViewController alloc] initWithNibName:@"MasterViewController" bundle:nil];
     [self.window.contentView addSubview:self.masterViewController.view];
-    self.masterViewController.view.frame = ((NSView*)self.window.contentView).bounds;
+    self.masterViewController.view.frame = ((NSView *)self.window.contentView).bounds;
 }
 
 - (void)applicationWillTerminate:(NSNotification *)aNotification {
 }
 
+
+- (BOOL)applicationShouldTerminateAfterLastWindowClosed:(NSApplication *)theApplication {
+    return YES;
+}
 @end

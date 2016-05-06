@@ -60,7 +60,8 @@
     {
         if ([tableColumn.identifier isEqualToString:@"Name"])
         {
-            NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:tableColumn.identifier ascending:YES comparator:^(ProvisioningProfileBean *p_1, ProvisioningProfileBean *p_2) {
+            NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:tableColumn.identifier ascending:YES comparator:^(ProvisioningProfileBean *p_1, ProvisioningProfileBean *p_2)
+            {
                 NSString *n_1 = p_1.name;
                 NSString *n_2 = p_2.name;
                 return [n_1 compare: n_2];
@@ -69,7 +70,8 @@
         }
         else if ([tableColumn.identifier isEqualToString:@"TeamName"])
         {
-            NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:tableColumn.identifier ascending:YES comparator:^(ProvisioningProfileBean *p_1, ProvisioningProfileBean *p_2) {
+            NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:tableColumn.identifier ascending:YES comparator:^(ProvisioningProfileBean *p_1, ProvisioningProfileBean *p_2)
+            {
                 NSString *n_1 = p_1.teamName;
                 NSString *n_2 = p_2.teamName;
                 return [n_1 compare: n_2];
@@ -78,7 +80,8 @@
         }
         else if ([tableColumn.identifier isEqualToString:@"ExpirationDate"])
         {
-            NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:tableColumn.identifier ascending:YES comparator:^(ProvisioningProfileBean *p_1, ProvisioningProfileBean *p_2) {
+            NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:tableColumn.identifier ascending:YES comparator:^(ProvisioningProfileBean *p_1, ProvisioningProfileBean *p_2)
+            {
                 NSDate *n_1 = p_1.expirationDate;
                 NSDate *n_2 = p_2.expirationDate;
                 return [n_1 compare: n_2];
@@ -107,14 +110,17 @@
     provisioningProfiles = [provisioningProfiles filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"self ENDSWITH '.mobileprovision'"]];
     for (NSString *path in provisioningProfiles)
     {
-        if ([[NSFileManager defaultManager] fileExistsAtPath:[NSString stringWithFormat:@"%@/%@", self.profilesPath, path] isDirectory:NO]) {
+        if ([[NSFileManager defaultManager] fileExistsAtPath:[NSString stringWithFormat:@"%@/%@", self.profilesPath, path] isDirectory:NO])
+        {
             ProvisioningProfileBean *profile = [[ProvisioningProfileBean alloc] initWithPath:[NSString stringWithFormat:@"%@/%@", self.profilesPath, path]];
             [self.profiles addObject:profile];
         }
     }
-    self.profiles = [[self.profiles sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+    self.profiles = [[self.profiles sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2)
+    {
         return [((ProvisioningProfileBean *)obj1).name compare:((ProvisioningProfileBean *)obj2).name];
     }] mutableCopy];
+    
     [self.textView setStringValue:@""];
     self.isFilter = NO;
     [self.filter setSelected:YES forSegment:2];
@@ -124,7 +130,8 @@
 - (void)filterProfilesByDeveloper
 {
     [self.filterProfiles removeAllObjects];
-    [self.profiles enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+    [self.profiles enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop)
+    {
         ProvisioningProfileBean *profile = (ProvisioningProfileBean*)obj;
         if ([profile.debug isEqualToString:@"YES"])
             [self.filterProfiles addObject:profile];
@@ -134,7 +141,8 @@
 - (void)filterProfilesByDistribution
 {
     [self.filterProfiles removeAllObjects];
-    [self.profiles enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+    [self.profiles enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop)
+    {
         ProvisioningProfileBean *profile = (ProvisioningProfileBean*)obj;
         if ([profile.debug isEqualToString:@"NO"])
             [self.filterProfiles addObject:profile];
@@ -154,7 +162,9 @@
 		
 	// show profile or show a popup to alert the user
 	if (profile == nil)
+    {
 		[NSApp presentError:[NSError errorWithDomain:@"Failed to load the provisioning profile" code:0 userInfo:@{}]];
+    }
 	else
     {
         [self refreshList:nil];
@@ -180,7 +190,7 @@
     [self.textView setStringValue:string];
 }
 
-- (ProvisioningProfileBean*)getProfileSelected
+- (ProvisioningProfileBean *)getProfileSelected
 {
     ProvisioningProfileBean *profile = nil;
     NSInteger selectedRow = self.table.selectedRow;
@@ -207,7 +217,7 @@
 }
 
 
-- (NSArray*)getSelectedProfiles
+- (NSArray *)getSelectedProfiles
 {
     NSMutableArray *profiles = [[NSMutableArray alloc] init];
     
@@ -257,7 +267,7 @@
 	
 	if ([opanel runModal] == NSOKButton)
 	{
-		NSString* path = [[opanel URL] path];
+		NSString *path = [[opanel URL] path];
 		[self loadProfileAtPath:path];
 	}
 }
@@ -333,14 +343,19 @@
     NSArray *profiles = [self getSelectedProfiles];
     
     if (profiles == nil)
+    {
         [NSApp presentError:[NSError errorWithDomain:@"Failed to delete the provisioning profile" code:0 userInfo:@{}]];
+    }
     else
     {
         for (ProvisioningProfileBean *profile in profiles)
         {
             if(profile)
+            {
                 [[NSFileManager defaultManager] trashItemAtURL:[NSURL fileURLWithPath:profile.path] resultingItemURL:nil error:nil];
+            }
         }
+        
         [self refreshList:nil];
     }
 }
